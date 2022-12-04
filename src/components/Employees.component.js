@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 import { Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import userEvent from '@testing-library/user-event'
-import EmployeeDetails from './EmployeeDetails'
-import key from './key'
+import EmployeeDetails from './EmployeeDetails.component'
+import key from '../key'
 
 export default class Employees extends Component {
     constructor(props){
@@ -34,10 +34,10 @@ export default class Employees extends Component {
         // make call to API and log errors
         try {
             const res = await axios.get(this.TEST_URL + '/api/emp/employees');
-            console.log(res.data.all_employees)
+            console.log(res.data.list)
             this.setState({
                 ...this.state,
-                employees : res.data.all_employees
+                employees : res.data.list
             });
         } catch (error) {
             console.log(error)
