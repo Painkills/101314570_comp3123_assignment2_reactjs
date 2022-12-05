@@ -54,7 +54,7 @@ export default class EmployeeList extends Component {
         // Hold all rendering in a styled div
         <div style={{ backgroundColor: 'steelblue', padding:'10px'}}>
             <h1 style={{textAlign:'center'}}>Employee List</h1>
-            <Button className='btn btn-warning' onClick={() => this.addTestEmployee()}>Add(TEST)</Button>  
+            {/* <Button className='btn btn-warning' onClick={() => this.addTestEmployee()}>Add(TEST)</Button>   */}
             <Link style={{margin: '10px'}} className='btn btn-success' to={'/add'}>Add an Employee </Link>   
             {/* Create Flexbox in which Cards containing Employees will be shown */}
             <div style={{ display:'flex', flexFlow: 'row wrap', justifyContent:'space-around'}}>
