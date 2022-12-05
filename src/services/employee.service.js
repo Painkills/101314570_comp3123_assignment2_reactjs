@@ -1,6 +1,6 @@
 import http from "../http-common"
 
-class TutorialDataService {
+class EmployeeDataService {
     getAll() {
       return http.get("emp/employees");
     }
@@ -20,8 +20,7 @@ class TutorialDataService {
     delete(id) {
       return http.delete(`emp/employees/${id}`);
     }
+}
   
-  }
-  
-  export default new TutorialDataService();
+  export default new EmployeeDataService();
 

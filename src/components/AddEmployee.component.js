@@ -1,39 +1,35 @@
 import React, { Component } from 'react';
 import { Button, Form } from 'react-bootstrap'
+import { Link } from "react-router-dom";
 import EmployeeDataService from '../services/employee.service'
 
 export default class AddEmployee extends Component {
     constructor(props) {
         super(props);
-        // this.onChangeFirstName = this.onChangeFirstName.bind(this);
-        // this.onChangeLastName = this.onChangeLastName.bind(this);
-        // this.onChangeEmail = this.onChangeEmail.bind(this);
-        // this.onChangeGender = this.onChangeGender.bind(this);
-        // this.onChangeSalary = this.onChangeSalary.bind(this);
-        this.onValChange = this.onValChange.bind(this);
+        // this.onValChange = this.onValChange.bind(this);
 
-        this.saveEmployee = this.saveEmployee.bind(this);
-        this.newEmployee = this.newEmployee.bind(this);
+        // this.saveEmployee = this.saveEmployee.bind(this);
+        // this.newEmployee = this.newEmployee.bind(this);
     
     this.state = {
-            firstName: "",
-            lastName: "",
+            first_name: "",
+            last_name: "",
             email: "",
             gender: "",
             salary: "",
 
             submitted: false
-    };
-}
+        };
+    }
 
     onValChange = (event) => {
         this.setState({...this.state, [event.target.id] : event.target.value})
     }
 
-    saveEmployee() {
+    saveEmployee = () => {
         var data = {
-          firstName: this.state.firstName,
-          lastName: this.state.lastName,
+          first_name: this.state.first_name,
+          last_name: this.state.last_name,
           email: this.state.email,
           gender: this.state.gender,
           salary: this.state.salary
@@ -44,8 +40,8 @@ export default class AddEmployee extends Component {
         EmployeeDataService.create(data)
             .then(response => {
                 this.setState({
-                    firstName: response.data.firstName,
-                    lastName: response.data.lastName,
+                    first_name: response.data.first_name,
+                    last_name: response.data.last_name,
                     email: response.data.email,
                     gender: response.data.gender,
                     salary: response.data.salary,
@@ -57,40 +53,40 @@ export default class AddEmployee extends Component {
                 .catch(e => {
                     console.log(e);
             });
-      }
+    }
     
-      newEmployee() {
+    newEmployee = () => {
         this.setState({
-            employee: {
-                firstName: "",
-                lastName: "",
-                email: "",
-                gender: "",
-                salary: "",
-    
-                submitted: false
-            }
+            first_name: "",
+            last_name: "",
+            email: "",
+            gender: "",
+            salary: "",
+
+            submitted: false
         });
-      }
+    }
     
     render () {
         return (
-            <div>
+            <div style={{ backgroundColor: 'steelblue', padding:'20px'}}>
                 {this.state.submitted ? (
                     <div>
                         <h4>Employee added successfully!</h4>
                         <Button className='btn btn-success' onClick={this.newEmployee}>Add Another</Button>
+                        <Link style={{margin: '10px'}} className='btn btn-secondary' to={'/employees'}> Back to List </Link>
                     </div>
                 ) : (
                     <div>
-                    <Form className="create-form">
+                    <h2> Create an Employee </h2>
+                    <Form className="create-form" style={{ textAlign: 'left'}}>
                         <Form.Group>
-                            <label htmlFor='firstName'>First Name</label>
-                            <input type='text' className='form-control' id='firstName' required name='firstName' onChange={(e) => this.onValChange(e)}/>
+                            <label htmlFor='first_name'>First Name</label>
+                            <input type='text' className='form-control' id='first_name' required name='first_name' onChange={(e) => this.onValChange(e)}/>
                         </Form.Group>
                         <Form.Group>
                             <label>Last Name</label>
-                            <input type='text' className='form-control' id='lastName' required value={this.state.lastName} name='lastName' onChange={(e) => this.onValChange(e)}/>
+                            <input type='text' className='form-control' id='last_name' required value={this.state.last_name} name='last_name' onChange={(e) => this.onValChange(e)}/>
                         </Form.Group>
                         <Form.Group>
                             <label>Email</label>
@@ -105,6 +101,7 @@ export default class AddEmployee extends Component {
                             <input type='text' className='form-control' id='salary' required value={this.state.salary} name='salary' onChange={(e) => this.onValChange(e)}/>
                         </Form.Group>
                         <Button onClick={this.saveEmployee} className="btn btn-success">Submit</Button>
+                        <Link style={{margin: '10px'}} className='btn btn-secondary' to={'/employees'}> Back to List</Link>
                     </Form>
                     </div>
                 )}                
